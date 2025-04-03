@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>DriveMitra by Visionyx | Advanced Car Safety Technology</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #FFAB00, #4A148C, #1A237E, #FF6D00);
             --text-color: #f0f0f0;
             --card-bg: rgba(30, 30, 50, 0.7);
+            --accent-color: #FF6D00;
+            --highlight-color: #FFAB00;
+            --white: #fff;
+            --light-gray: rgba(255, 255, 255, 0.1);
         }
 
         * {
@@ -17,32 +24,29 @@
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-family: 'Arial', sans-serif;
             background: var(--primary-gradient);
             color: var(--text-color);
             line-height: 1.6;
             overflow-x: hidden;
+            transition: background 0.3s ease;
         }
 
-        .navbar {
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 20px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 5%;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            position: fixed;
-            width: 100%;
-            z-index: 1000;
-            /* margin-bottom: 200px; */
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            font-size: 24px;
-            font-weight: bold;
+            transition: background 0.3s ease;
         }
 
         .logo img {
@@ -60,73 +64,73 @@
         }
 
         .nav-links a {
-            color: var(--text-color);
+            color: var(--white);
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
         .nav-links a:hover {
-            color: #FF6D00;
+            color: var(--accent-color);
+        }
+
+        section {
+            padding: 60px 5%;
         }
 
         .hero {
-            display: flex;
-            align-items: center;
             min-height: 100vh;
-            padding: 0 5%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             background: rgba(0, 0, 0, 0.3);
+            text-align: center;
         }
 
-        .hero-content {
-            flex: 1;
-            z-index: 10;
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
+        .hero h1 {
+            font-size: 4rem;
             margin-bottom: 20px;
-            background: linear-gradient(to right, #FFAB00, #FF6D00);
+            background: linear-gradient(to right, var(--highlight-color), var(--accent-color));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .hero-content p {
+        .hero p {
             max-width: 600px;
-            margin-bottom: 30px;
+            margin: 0 auto 20px;
         }
 
         .cta-buttons {
             display: flex;
             gap: 20px;
+            justify-content: center;
         }
 
         .btn {
             padding: 12px 25px;
             text-decoration: none;
             border-radius: 5px;
+            font-size: 1rem;
             transition: transform 0.3s ease;
+            display: inline-block;
+            text-align: center;
         }
 
         .btn-primary {
-            background: #FF6D00;
-            color: white;
-            /* margin: 10px; */
-            margin-right: 10px;
-            /* margin-bottom: 200px; */
-            /* padding-bottom: 200px; */
-
+            background: var(--accent-color);
+            color: var(--white);
         }
 
         .btn-secondary {
-            border: 2px solid #FFAB00;
-            color: #FFAB00;
+            border: 2px solid var(--highlight-color);
+            color: var(--highlight-color);
         }
 
         .features {
             display: flex;
             justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
             padding: 50px 5%;
-            background: rgba(0, 0, 0, 0.4);
         }
 
         .feature-card {
@@ -145,11 +149,10 @@
 
         .feature-card i {
             font-size: 3rem;
-            color: #FF6D00;
+            color: var(--accent-color);
             margin-bottom: 20px;
         }
 
-       
         .testimonials {
             padding: 50px 5%;
             background: rgba(0, 0, 0, 0.5);
@@ -171,81 +174,27 @@
             background: rgba(0, 0, 0, 0.7);
             padding: 30px 5%;
             text-align: center;
-        }
-        .hero-cta{
-            margin-bottom: 20px;
-        }
-        .product-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 50px 20px;
-        }
-
-        .product-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .product-header h1 {
-            font-size: 3.5rem;
-            background: linear-gradient(to right, #FFAB00, #FF6D00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-        }
-
-        .product-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-
-        .product-image {
-            position: relative;
-            perspective: 1000px;
-        }
-
-        .product-image img {
-            width: 100%;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            transition: transform 0.5s ease;
-        }
-
-        .product-image:hover img {
-            transform: rotateY(10deg) scale(1.05);
-        }
-
-        .product-details {
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-        }
-
-        .feature-list {
-            margin-top: 30px;
+            color: var(--white);
         }
 
         .feature-item {
             display: flex;
             align-items: center;
             margin-bottom: 20px;
-            background: rgba(255,255,255,0.05);
+            background: rgba(255, 255, 255, 0.05);
             padding: 15px;
             border-radius: 10px;
             transition: all 0.3s ease;
         }
 
         .feature-item:hover {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             transform: translateX(10px);
         }
 
         .feature-icon {
-            background: linear-gradient(to right, #FF6D00, #FFAB00);
-            color: white;
+            background: linear-gradient(to right, var(--accent-color), var(--highlight-color));
+            color: var(--white);
             width: 50px;
             height: 50px;
             border-radius: 50%;
@@ -256,160 +205,16 @@
             flex-shrink: 0;
         }
 
-        .benefit-section {
-            margin-top: 50px;
-            text-align: center;
-            background: rgba(0,0,0,0.3);
-            padding: 50px 20px;
-            border-radius: 15px;
-        }
-
-        .benefit-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .benefit-card {
-            background: rgba(255,255,255,0.05);
-            padding: 30px;
-            border-radius: 15px;
-            transition: all 0.3s ease;
-        }
-
-        .benefit-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255,255,255,0.1);
-        }
-
-        .benefit-card i {
-            font-size: 2.5rem;
-            background: linear-gradient(to right, #FFAB00, #FF6D00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 15px;
-        }
-        .journey-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 50px 20px;
-        }
-
-        .problem-discovery {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            margin-bottom: 50px;
-        }
-
-        .discovery-narrative {
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 20px;
-            backdrop-filter: blur(15px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .discovery-narrative::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at center, 
-                rgba(255,109,0,0.1) 0%, 
-                rgba(255,171,0,0.1) 50%, 
-                transparent 70%);
-            animation: pulse 10s infinite alternate;
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: rotate(0deg) scale(1);
-            }
-            100% {
-                transform: rotate(360deg) scale(1.2);
-            }
-        }
-
-        .discovery-narrative h2 {
-            background: linear-gradient(to right, #FFAB00, #FF6D00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 10;
-        }
-
-        .discovery-narrative p {
-            position: relative;
-            z-index: 10;
-            color: rgba(255,255,255,0.8);
-        }
-
-        .interview-insights {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .insight-card {
-            background: rgba(255,255,255,0.05);
-            padding: 20px;
-            border-radius: 15px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .insight-card::after {
-            content: '';
-            position: absolute;
-            bottom: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at center, 
-                rgba(255,109,0,0.2) 0%, 
-                transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .insight-card:hover::after {
-            opacity: 1;
-        }
-
-        .insight-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255,255,255,0.1);
-        }
-
-        .video-section {
-            margin-top: 50px;
-        }
-
-        .video-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
-
         .video-container {
             background: var(--card-bg);
             border-radius: 20px;
             overflow: hidden;
-            position: relative;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease;
         }
 
         .video-container:hover {
-            transform: scale(1.03);
+            transform: scale(1.05);
         }
 
         .video-overlay {
@@ -417,20 +222,20 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
             padding: 20px;
-            color: white;
+            color: var(--white);
         }
 
         .video-placeholder {
             width: 100%;
             height: 400px;
-            background: rgba(0,0,0,0.3);
+            background: rgba(0, 0, 0, 0.3);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2rem;
-            color: rgba(255,255,255,0.5);
+            color: rgba(255, 255, 255, 0.5);
         }
 
         .play-icon {
@@ -439,7 +244,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: 4rem;
-            color: rgba(255,255,255,0.7);
+            color: rgba(255, 255, 255, 0.7);
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -449,8 +254,10 @@
         }
     </style>
 </head>
+
 <body>
-    <nav class="navbar">
+
+    <header>
         <div class="logo">
             <img src="/api/placeholder/50/50" alt="Visionyx Logo">
             DriveMitra
@@ -458,114 +265,23 @@
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#features">Features</a></li>
-            <li><a href="#technology">Technology</a></li>
             <li><a href="#testimonials">Testimonials</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
-    </nav>
-    <!-- <br> -->
+    </header>
 
     <section class="hero" id="home">
-        <div class="hero-content">
+        <div>
             <h1>Revolutionizing Car Safety with Intelligence</h1>
-            <p>DriveMitra transforms your driving experience with cutting-edge Level 1 ADAS technology, blending advanced object detection, lane tracking, and intelligent night vision assistance.</p>
-            
-            <div class="hero-cta">
-                <a href="#" class="btn btn-primary">
-                    <i class="fas fa-play-circle"></i> Watch Demo
-                </a>
-                <a href="#features" class="btn btn-secondary">
-                    <i class="fas fa-info-circle"></i> Learn More
-                </a>
-            </div>
+            <p>DriveMitra transforms your driving experience with cutting-edge ADAS technology, blending advanced object detection, lane tracking, and intelligent night vision assistance.</p>
 
-            <div class="hero-stats">
-                <div class="hero-stat">
-                    <h3>99.7%</h3>
-                    <p>Accuracy Rate</p>
-                </div>
-                <div class="hero-stat">
-                    <h3>0.1s</h3>
-                    <p>Response Time</p>
-                </div>
-                <div class="hero-stat">
-                    <h3>24/7</h3>
-                    <p>Intelligent Monitoring</p>
-                </div>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary"><i class="fas fa-play-circle"></i> Watch Demo</a>
+                <a href="#features" class="btn btn-secondary"><i class="fas fa-info-circle"></i> Learn More</a>
             </div>
         </div>
     </section>
 
-    <div class="product-container">
-        <div class="product-header">
-            <h1>DriveMitra: Your Guardian on the Road</h1>
-            <p>Advanced Level 1 ADAS Technology Redefining Automotive Safety</p>
-        </div>
-
-        <div class="product-content">
-            <div class="product-image">
-                <img src="/api/placeholder/600/400" alt="DriveMitra ADAS Device">
-            </div>
-            <div class="product-details">
-                <h2>What is DriveMitra?</h2>
-                <p>DriveMitra is a cutting-edge Level 1 Advanced Driver Assistance System (ADAS) designed to enhance vehicle safety and driver confidence through intelligent technology.</p>
-                
-                <div class="feature-list">
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <i class="fas fa-eye"></i>
-                        </div>
-                        <div>
-                            <h3>Object Detection</h3>
-                            <p>Real-time identification of vehicles, pedestrians, and obstacles with 99.7% accuracy.</p>
-                        </div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <i class="fas fa-road"></i>
-                        </div>
-                        <div>
-                            <h3>Lane Tracking</h3>
-                            <p>Precise lane detection and departure warning to prevent unintended drifting.</p>
-                        </div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <i class="fas fa-moon"></i>
-                        </div>
-                        <div>
-                            <h3>Night Vision Assistance</h3>
-                            <p>Enhanced visibility in low-light conditions for safer night driving.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="benefit-section">
-            <h2>How DriveMitra Transforms Your Driving Experience</h2>
-            <p>More than just a safety device, DriveMitra is your intelligent driving companion.</p>
-
-            <div class="benefit-grid">
-                <div class="benefit-card">
-                    <i class="fas fa-shield-alt"></i>
-                    <h3>Enhanced Safety</h3>
-                    <p>Proactive risk detection and prevention, reducing accident probability by up to 70%.</p>
-                </div>
-                <div class="benefit-card">
-                    <i class="fas fa-clock"></i>
-                    <h3>Instant Alerts</h3>
-                    <p>Real-time notifications for potential hazards with less than 0.1s response time.</p>
-                </div>
-                <div class="benefit-card">
-                    <i class="fas fa-mobile-alt"></i>
-                    <h3>Smart Connectivity</h3>
-                    <p>Seamless integration with mobile app for comprehensive vehicle monitoring.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-<!-- 
     <section class="features" id="features">
         <div class="feature-card">
             <i class="fas fa-eye"></i>
@@ -582,70 +298,10 @@
             <h3>Night Vision</h3>
             <p>Enhanced visibility in low-light conditions, making night driving safer and more comfortable.</p>
         </div>
-    </section> -->
-
-    <div class="journey-container">
-        <div class="problem-discovery">
-            <div class="discovery-narrative">
-                <h2>The Journey to DriveMitra</h2>
-                <p>Our mission began with a simple yet profound question: How can we make driving safer for everyone? Through extensive interviews and research, we uncovered critical insights that shaped our vision.</p>
-                
-                <div class="interview-insights">
-                    <div class="insight-card">
-                        <h3>Safety Concerns</h3>
-                        <p>Drivers expressed overwhelming anxiety about road safety, especially in challenging conditions.</p>
-                    </div>
-                    <div class="insight-card">
-                        <h3>Technology Gap</h3>
-                        <p>Existing solutions were either too expensive or ineffective for average drivers.</p>
-                    </div>
-                    <div class="insight-card">
-                        <h3>Human Limitations</h3>
-                        <p>Human reaction times are significantly slower than technological interventions.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="interview-videos">
-                <h2>Interview Insights</h2>
-                <p>Hear directly from the voices that inspired our journey</p>
-                <!-- Placeholder for interview video thumbnails -->
-                <div class="video-placeholder">
-                    Interview Videos
-                </div>
-            </div>
-        </div>
-
-        <div class="video-section">
-            <h2>Our Story in Motion</h2>
-            <div class="video-grid">
-                <div class="video-container">
-                    <div class="video-placeholder">
-                        <i class="fas fa-play-circle play-icon"></i>
-                        <video src="https://www.youtube.com/watch?v=IxX_QHay02M&pp=ygUJb2lpYSBvaWlh">Video</video>
-                        Marketing Video
-                    </div>
-                    <div class="video-overlay">
-                        <h3>DriveMitra: Vision of Safety</h3>
-                        <p>Discover the technology that's changing automotive safety</p>
-                    </div>
-                </div>
-                <div class="video-container">
-                    <div class="video-placeholder">
-                        <i class="fas fa-play-circle play-icon"></i>
-                        Customer Testimonial
-                    </div>
-                    <div class="video-overlay">
-                        <h3>Real Stories, Real Impact</h3>
-                        <p>How DriveMitra saved a life</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    </section>
 
     <section class="testimonials" id="testimonials">
-        <h2 style="text-align: center; margin-bottom: 30px;">What Our Test Drivers Say</h2>
+        <h2>What Our Test Drivers Say</h2>
         <div class="testimonial-grid">
             <div class="testimonial-card">
                 <p>"DriveMitra has completely transformed my driving experience. I feel so much safer on the road!"</p>
@@ -667,4 +323,5 @@
         <p>Pioneering Safe Mobility</p>
     </footer>
 </body>
+
 </html>
