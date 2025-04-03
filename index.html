@@ -7,18 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>DriveMitra by Visionyx | Advanced Car Safety Technology</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
     <style>
-        :root {
-            --primary-gradient: linear-gradient(135deg, #FFAB00, #4A148C, #1A237E, #FF6D00);
-            --text-color: #f0f0f0;
-            --card-bg: rgba(30, 30, 50, 0.7);
-            --accent-color: #FF6D00;
-            --highlight-color: #FFAB00;
-            --white: #fff;
-            --light-gray: rgba(255, 255, 255, 0.1);
-        }
-
+        /* General Reset */
         * {
             margin: 0;
             padding: 0;
@@ -34,14 +24,26 @@
             transition: background 0.3s ease;
         }
 
+        :root {
+            --primary-gradient: linear-gradient(135deg, #FFAB00, #4A148C, #1A237E, #FF6D00);
+            --text-color: #f0f0f0;
+            --card-bg: rgba(30, 30, 50, 0.7);
+            --accent-color: #FF6D00;
+            --highlight-color: #FFAB00;
+            --white: #fff;
+            --light-gray: rgba(255, 255, 255, 0.1);
+            --nav-height: 70px;
+        }
+
+        /* Header */
         header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(15px);
             padding: 20px 5%;
             display: flex;
             justify-content: space-between;
@@ -66,39 +68,57 @@
         .nav-links a {
             color: var(--white);
             text-decoration: none;
-            transition: color 0.3s ease;
+            font-weight: bold;
+            padding: 10px 20px;
+            transition: color 0.3s ease, transform 0.3s ease;
         }
 
         .nav-links a:hover {
             color: var(--accent-color);
+            transform: scale(1.1);
         }
 
-        section {
-            padding: 60px 5%;
-        }
-
+        /* Hero Section with Parallax Scrolling */
         .hero {
             min-height: 100vh;
+            background: url('your-hero-image.jpg') no-repeat center center/cover;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: rgba(0, 0, 0, 0.3);
             text-align: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
         }
 
         .hero h1 {
             font-size: 4rem;
+            color: var(--white);
             margin-bottom: 20px;
             background: linear-gradient(to right, var(--highlight-color), var(--accent-color));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            transition: transform 0.5s ease;
         }
 
         .hero p {
             max-width: 600px;
             margin: 0 auto 20px;
+            font-size: 1.2rem;
         }
 
+        /* CTA Buttons */
         .cta-buttons {
             display: flex;
             gap: 20px;
@@ -110,9 +130,9 @@
             text-decoration: none;
             border-radius: 5px;
             font-size: 1rem;
-            transition: transform 0.3s ease;
             display: inline-block;
             text-align: center;
+            transition: transform 0.3s ease, background 0.3s ease;
         }
 
         .btn-primary {
@@ -120,17 +140,30 @@
             color: var(--white);
         }
 
+        .btn-primary:hover {
+            background: var(--highlight-color);
+            transform: translateY(-5px);
+        }
+
         .btn-secondary {
             border: 2px solid var(--highlight-color);
             color: var(--highlight-color);
         }
 
+        .btn-secondary:hover {
+            background: var(--highlight-color);
+            color: var(--white);
+            transform: translateY(-5px);
+        }
+
+        /* Features Section */
         .features {
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 30px;
             padding: 50px 5%;
+            background: rgba(0, 0, 0, 0.6);
         }
 
         .feature-card {
@@ -144,7 +177,7 @@
         }
 
         .feature-card:hover {
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
 
         .feature-card i {
@@ -153,68 +186,47 @@
             margin-bottom: 20px;
         }
 
-        .testimonials {
-            padding: 50px 5%;
-            background: rgba(0, 0, 0, 0.5);
-        }
-
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .testimonial-card {
-            background: var(--card-bg);
-            padding: 25px;
-            border-radius: 10px;
-        }
-
-        footer {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 30px 5%;
+        /* Countdown Timer */
+        .countdown {
             text-align: center;
-            color: var(--white);
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 15px;
+            margin-top: 50px;
+            padding: 30px;
+            background: var(--card-bg);
             border-radius: 10px;
-            transition: all 0.3s ease;
+            width: 50%;
+            margin: 50px auto;
         }
 
-        .feature-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateX(10px);
+        .countdown h3 {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
         }
 
-        .feature-icon {
-            background: linear-gradient(to right, var(--accent-color), var(--highlight-color));
+        .countdown p {
+            font-size: 1.5rem;
             color: var(--white);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 20px;
-            flex-shrink: 0;
         }
 
+        /* Video Container */
         .video-container {
             background: var(--card-bg);
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease;
+            margin: 30px 0;
+            position: relative;
         }
 
         .video-container:hover {
             transform: scale(1.05);
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
 
         .video-overlay {
@@ -227,30 +239,36 @@
             color: var(--white);
         }
 
-        .video-placeholder {
-            width: 100%;
-            height: 400px;
-            background: rgba(0, 0, 0, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: rgba(255, 255, 255, 0.5);
+        /* Testimonial Section */
+        .testimonials {
+            padding: 50px 5%;
+            background: rgba(0, 0, 0, 0.5);
+            color: var(--white);
         }
 
-        .play-icon {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 4rem;
-            color: rgba(255, 255, 255, 0.7);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
         }
 
-        .video-container:hover .play-icon {
-            opacity: 1;
+        .testimonial-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px 5%;
+            text-align: center;
+            color: var(--white);
         }
     </style>
 </head>
@@ -259,7 +277,7 @@
 
     <header>
         <div class="logo">
-            <img src="/api/placeholder/50/50" alt="Visionyx Logo">
+            <img src="logo.png" alt="Visionyx Logo">
             DriveMitra
         </div>
         <ul class="nav-links">
@@ -298,6 +316,23 @@
             <h3>Night Vision</h3>
             <p>Enhanced visibility in low-light conditions, making night driving safer and more comfortable.</p>
         </div>
+        <div class="feature-card">
+            <i class="fas fa-ruler-combined"></i>
+            <h3>Object Distance</h3>
+            <p>Measures the distance between your vehicle and objects in your surroundings for enhanced safety and collision prevention.</p>
+        </div>
+    </section>
+
+    <div class="countdown">
+        <h3>Launching Soon!</h3>
+        <p>Get ready for an exciting new feature coming in 30 days!</p>
+    </div>
+
+    <section class="video-container">
+        <iframe src="https://www.youtube.com/embed/videoID" title="Product Demo"></iframe>
+        <div class="video-overlay">
+            <h4>Watch the Full Demo</h4>
+        </div>
     </section>
 
     <section class="testimonials" id="testimonials">
@@ -322,6 +357,7 @@
         <p>&copy; 2025 Visionyx Technologies. All Rights Reserved.</p>
         <p>Pioneering Safe Mobility</p>
     </footer>
+
 </body>
 
 </html>
